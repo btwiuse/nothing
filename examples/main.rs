@@ -1,10 +1,17 @@
+//! $ cargo run --example main; echo $?
+//! args = Nothing
+//! 1
+//!
+//! $ cargo run --example main Probably Nothing; echo $?
+//! args = Something(["Probably", "Nothing"])
+//! 0
+//!
 use nothing::{Nothing, Probably, Something};
 
 fn get_args() -> Probably<Vec<String>> {
-    let args: Vec<String> = std::env::args().skip(1).collect();
-    match args.len() {
-        0 => Nothing,
-        _ => Something(args),
+    match std::env::args().collect::<Vec<String>>() {
+        args @ _ if args.len() > 1 => Something(args),
+        _ => Nothing,
     }
 }
 
