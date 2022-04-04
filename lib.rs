@@ -1,8 +1,4 @@
-#![feature(
-    derive_default_enum,
-    process_exitcode_placeholder,
-    termination_trait_lib
-)]
+#![feature(derive_default_enum)]
 
 //! nothing
 //! =======
@@ -53,10 +49,10 @@ pub enum Probably<T> {
 pub use Probably::{Nothing, Something};
 
 impl<T> std::process::Termination for Probably<T> {
-    fn report(self) -> i32 {
+    fn report(self) -> std::process::ExitCode {
         match self {
-            Nothing => std::process::ExitCode::FAILURE.report(),
-            _ => std::process::ExitCode::SUCCESS.report(),
+            Nothing => std::process::ExitCode::FAILURE,
+            _ => std::process::ExitCode::SUCCESS,
         }
     }
 }
