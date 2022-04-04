@@ -19,7 +19,15 @@
 //! 
 //! # Why?
 //! 
-//! The point is that you can use [Probably] as the return type of your main function. 
+//! The point is that you can use [Probably] as the return type of your main function:
+//! 
+//! ```
+//! use nothing::{Probably, Nothing};
+//! 
+//! fn main() -> Probably<()> {
+//!     Nothing
+//! }
+//! ```
 //! 
 //! Exit code is `0` if it is [Something], `1` if [Nothing]. 
 //! 
