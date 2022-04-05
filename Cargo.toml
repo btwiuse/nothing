@@ -1,8 +1,8 @@
 [package]
 name = "nothing"
-version = "0.1.6"
+version = "0.1.7"
 edition = "2021"
-description = "Probably Nothing"
+description = "Probably a better Option"
 license = "MIT"
 documentation = "https://docs.rs/nothing"
 repository = "https://github.com/btwiuse/nothing"
