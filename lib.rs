@@ -7,7 +7,7 @@
 //!
 //! nothing::[Probably] is a better [Option].
 //!
-//! ```
+//! ```no_run
 //! pub enum Probably<T> {
 //!     Nothing,
 //!     Something(T),
@@ -18,7 +18,7 @@
 //!
 //! The point is that you can use [Probably] as the return type of your main function:
 //!
-//! ```
+//! ```no_run
 //! use nothing::{Probably, Nothing};
 //!
 //! fn main() -> Probably<()> {
@@ -33,8 +33,6 @@
 //! ![Probably::Nothing](https://camo.githubusercontent.com/8bfa566db90d366cb0dd026267f78a7dfca0c3193cb84172b90d05b594b7062c/68747470733a2f2f692e696d6775722e636f6d2f41754464624f4b2e706e67)
 //!
 //! Probably nothing.
-//!
-
 #![feature(derive_default_enum)]
 #![feature(try_trait_v2)]
 
@@ -86,6 +84,12 @@ impl<T> std::ops::Try for Probably<T> {
     }
 }
 
+impl<T> From<T> for Probably<T> {
+    fn from(x: T) -> Self {
+        Something(x)
+    }
+}
+
 impl<T> From<Option<T>> for Probably<T> {
     fn from(x: Option<T>) -> Self {
         match x {
@@ -106,9 +110,32 @@ impl<T> Into<Option<T>> for Probably<T> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
     fn it_works() {
         let result = 2 + 2;
         assert_eq!(result, 4);
+    }
+
+    #[test]
+    fn from_option_works() {
+        let some = Some(42u8);
+        let sth: Probably<u8> = some.into();
+        assert_eq!(sth, Something(42u8));
+    }
+
+    #[test]
+    fn from_unit_works() {
+        let unit = ();
+        let sth: Probably<()> = unit.into();
+        assert_eq!(sth, Something(()));
+    }
+
+    #[test]
+    fn from_some_works() {
+        let unit = Some(());
+        let sth: Probably<()> = unit.into();
+        assert_eq!(sth, Something(()));
     }
 }

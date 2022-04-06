@@ -7,7 +7,7 @@ nothing
 
 nothing::[Probably] is a better [Option].
 
-```
+```no_run
 pub enum Probably<T> {
     Nothing,
     Something(T),
@@ -18,7 +18,7 @@ pub enum Probably<T> {
 
 The point is that you can use [Probably] as the return type of your main function:
 
-```
+```no_run
 use nothing::{Probably, Nothing};
 
 fn main() -> Probably<()> {
