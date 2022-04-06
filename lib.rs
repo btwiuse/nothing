@@ -86,6 +86,24 @@ impl<T> std::ops::Try for Probably<T> {
     }
 }
 
+impl<T> From<Option<T>> for Probably<T> {
+    fn from(x: Option<T>) -> Self {
+        match x {
+            Some(v) => Something(v),
+            None => Nothing,
+        }
+    }
+}
+
+impl<T> Into<Option<T>> for Probably<T> {
+    fn into(self) -> Option<T> {
+        match self {
+            Something(x) => Some(x),
+            Nothing => None,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
