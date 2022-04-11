@@ -7,18 +7,18 @@
 //!
 //! nothing::[Probably] is a better [Option].
 //!
-//! ```no_run
+//! ```
 //! pub enum Probably<T> {
 //!     Nothing,
 //!     Something(T),
 //! }
 //! ```
 //!
-//! # Why?
+//! ## Why?
 //!
 //! The point is that you can use [Probably] as the return type of your main function:
 //!
-//! ```no_run
+//! ```
 //! use nothing::{Probably, Nothing};
 //!
 //! fn main() -> Probably<()> {
@@ -32,6 +32,12 @@
 //!
 //! ![Probably::Nothing](https://camo.githubusercontent.com/8bfa566db90d366cb0dd026267f78a7dfca0c3193cb84172b90d05b594b7062c/68747470733a2f2f692e696d6775722e636f6d2f41754464624f4b2e706e67)
 //!
+//! ## Not convinced?
+//!
+//! Real-world examples:
+//!
+//! - [that](https://crates.io/crates/that)
+//!
 //! Probably nothing.
 #![feature(derive_default_enum)]
 #![feature(try_trait_v2)]
@@ -39,7 +45,7 @@
 /// [Probably] is a better [Option]:
 /// - [Something] is like [Some]
 /// - [Nothing] is like [None]
-#[derive(Clone, Copy, PartialOrd, Ord, PartialEq, Eq, Debug, Hash, Default)]
+#[derive(is_macro::Is, Clone, Copy, PartialOrd, Ord, PartialEq, Eq, Debug, Hash, Default)]
 pub enum Probably<T> {
     /// No value.
     #[default]

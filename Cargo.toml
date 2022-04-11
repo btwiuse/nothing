@@ -1,6 +1,6 @@
 [package]
 name = "nothing"
-version = "0.1.9"
+version = "0.1.10"
 edition = "2021"
 description = "Probably a better Option"
 license = "MIT"
@@ -12,5 +12,7 @@ homepage = "https://github.com/btwiuse/nothing"
 
 [lib]
 path = "lib.rs"
+doctest = false
 
 [dependencies]
+is-macro = "0.2"
