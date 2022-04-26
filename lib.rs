@@ -114,6 +114,40 @@ impl<T> Into<Option<T>> for Probably<T> {
     }
 }
 
+impl<T> Probably<Probably<T>> {
+    /// Converts from `Probably<Probably<T>>` to `Probably<T>`.
+    ///
+    /// # Examples
+    ///
+    /// Basic usage:
+    ///
+    /// ```
+    /// let x: Probably<Probably<u32>> = Something(Something(6));
+    /// assert_eq!(Something(6), x.flatten());
+    ///
+    /// let x: Probably<Probably<u32>> = Something(Nothing);
+    /// assert_eq!(Nothing, x.flatten());
+    ///
+    /// let x: Probably<Probably<u32>> = Nothing;
+    /// assert_eq!(Nothing, x.flatten());
+    /// ```
+    ///
+    ///
+    /// Flattening only removes one level of nesting at a time:
+    ///
+    /// ```
+    /// let x: Probably<Probably<Probably<u32>>> = Something(Something(Something(6)));
+    /// assert_eq!(Something(Something(6)), x.flatten());
+    /// assert_eq!(Something(6), x.flatten().flatten());
+    /// ```
+    pub fn flatten(self) -> Probably<T> {
+        match self {
+            Something(inner) => inner,
+            Nothing => Nothing,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
