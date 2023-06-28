@@ -1,6 +1,5 @@
 #![doc = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/README.md"))]
 
-#![feature(derive_default_enum)]
 #![feature(try_trait_v2)]
 
 /// [Probably] is a better [Option]:
